@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2014 at 12:27 PM
+-- Generation Time: Mar 17, 2014 at 12:37 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `hasScholarshipGrants` tinyint(1) NOT NULL,
   `hasSeminarsAndTrainings` tinyint(1) NOT NULL,
   `hasRecruitmentActivities` tinyint(1) NOT NULL,
+  `hasAllowanceProvision` tinyint(1) NOT NULL,
   `hasFacultyImmersion` tinyint(1) NOT NULL,
   `primaryContactName` varchar(150) NOT NULL,
   `primaryContactDesignation` varchar(50) NOT NULL,
@@ -90,21 +91,21 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `primaryContactMobileNumber` varchar(16) NOT NULL,
   `primaryContactEmail` varchar(64) NOT NULL,
   `primaryContactDateOfBirth` date NOT NULL,
-  `secondaryContactName` int(150) NOT NULL,
-  `secondaryContactDesignation` int(50) NOT NULL,
-  `secondaryContactTelephoneNumber` int(16) NOT NULL,
-  `secondaryContactMobileNumber` int(16) NOT NULL,
-  `secondaryContactEmail` int(64) NOT NULL,
+  `secondaryContactName` varchar(150) NOT NULL,
+  `secondaryContactDesignation` varchar(50) NOT NULL,
+  `secondaryContactTelephoneNumber` varchar(16) NOT NULL,
+  `secondaryContactMobileNumber` varchar(16) NOT NULL,
+  `secondaryContactEmail` varchar(64) NOT NULL,
   `secondaryContactDateOfBirth` date NOT NULL,
   PRIMARY KEY (`employerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `employers`
 --
 
-INSERT INTO `employers` (`employerID`, `companyName`, `industryID`, `isHiring`, `isIndustryPartner`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`) VALUES
-(1, 'IBM', 1, 1, 0, '', '', '', '', '', '0000-00-00', '', '', 0, 0, 0, 0, '', '', '', '', '', '0000-00-00', 0, 0, 0, 0, 0, '0000-00-00');
+INSERT INTO `employers` (`employerID`, `companyName`, `industryID`, `isHiring`, `isIndustryPartner`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`) VALUES
+(2, 'IBM', 25, 1, 1, '', 'Makati', '990-2930', '990-2931', 'ibm.com', '2014-03-04', '', '', 1, 1, 1, 0, 1, 'John Doe', 'HR Manager', '928-3948', '0922-384-3455', 'johndoe@gmail.com', '2014-03-11', 'Jane Doe', 'HR Assistant', '234-2323', '0912-239-4443', 'janedoe@gmail.com', '2014-03-05');
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,6 @@ CREATE TABLE IF NOT EXISTS `job_openings` (
   `postDate` date NOT NULL,
   `postDuration` tinyint(2) NOT NULL,
   `industry` varchar(255) NOT NULL,
-  `hasAllowanceProvision` tinyint(1) NOT NULL,
   `isVerified` tinyint(1) NOT NULL,
   `isActive` tinyint(1) NOT NULL,
   PRIMARY KEY (`jobOpeningID`)
