@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2014 at 12:37 PM
+-- Generation Time: Mar 17, 2014 at 12:41 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -71,7 +71,6 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `companyName` varchar(255) NOT NULL,
   `industryID` int(11) NOT NULL,
   `isHiring` tinyint(1) NOT NULL,
-  `isIndustryPartner` tinyint(1) NOT NULL,
   `SECRegistrationFilePath` varchar(255) NOT NULL,
   `completeMailingAddress` varchar(255) NOT NULL,
   `telephoneNumber` varchar(60) NOT NULL,
@@ -104,8 +103,8 @@ CREATE TABLE IF NOT EXISTS `employers` (
 -- Dumping data for table `employers`
 --
 
-INSERT INTO `employers` (`employerID`, `companyName`, `industryID`, `isHiring`, `isIndustryPartner`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`) VALUES
-(2, 'IBM', 25, 1, 1, '', 'Makati', '990-2930', '990-2931', 'ibm.com', '2014-03-04', '', '', 1, 1, 1, 0, 1, 'John Doe', 'HR Manager', '928-3948', '0922-384-3455', 'johndoe@gmail.com', '2014-03-11', 'Jane Doe', 'HR Assistant', '234-2323', '0912-239-4443', 'janedoe@gmail.com', '2014-03-05');
+INSERT INTO `employers` (`employerID`, `companyName`, `industryID`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`) VALUES
+(2, 'IBM', 25, 1, '', 'Makati', '990-2930', '990-2931', 'ibm.com', '2014-03-04', '', '', 1, 1, 1, 0, 1, 'John Doe', 'HR Manager', '928-3948', '0922-384-3455', 'johndoe@gmail.com', '2014-03-11', 'Jane Doe', 'HR Assistant', '234-2323', '0912-239-4443', 'janedoe@gmail.com', '2014-03-05');
 
 -- --------------------------------------------------------
 
