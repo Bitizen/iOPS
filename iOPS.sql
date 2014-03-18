@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 18, 2014 at 05:51 AM
+-- Generation Time: Mar 18, 2014 at 06:49 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
 
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
-(2, 'members', 'General User');
+(2, 'employer', 'Employer');
 
 -- --------------------------------------------------------
 
@@ -321,14 +321,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `landline` varchar(20) DEFAULT NULL,
   `mobile` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `middle_name`, `landline`, `mobile`) VALUES
-(1, '\0\0', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', '', '0', '');
+(1, '\0\0', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1395120589, 1, 'Admin', 'istrator', '', '0', ''),
+(2, '', 'employer', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'employer@gmail.com', NULL, NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 0, 1395121492, 1, 'john', 'doe', 'jay', '908-3379', '0911-234-3455');
 
 -- --------------------------------------------------------
 
@@ -348,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `users_employers_students_administrators` (
 --
 
 INSERT INTO `users_employers_students_administrators` (`userID`, `employerID`, `studentID`, `administratorID`) VALUES
-(1, 1, 0, 0);
+(2, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -372,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
-(2, 1, 2);
+(2, 2, 2);
 
 --
 -- Constraints for dumped tables
