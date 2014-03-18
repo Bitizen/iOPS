@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2014 at 02:09 PM
+-- Generation Time: Mar 18, 2014 at 05:51 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -27,13 +27,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `administrators` (
-  `administratorID` int(11) NOT NULL,
+  `administratorID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `middleName` varchar(50) NOT NULL,
   `position` varchar(255) NOT NULL,
   PRIMARY KEY (`administratorID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `administrators`
+--
+
+INSERT INTO `administrators` (`administratorID`, `firstName`, `lastName`, `middleName`, `position`) VALUES
+(1, 'Barry', 'Celis', 'B', 'Internship Head');
 
 -- --------------------------------------------------------
 
@@ -104,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `employers` (
 --
 
 INSERT INTO `employers` (`employerID`, `companyName`, `industryID`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`) VALUES
-(1, 'IBM', 25, 1, '', 'Makati', '990-2930', '990-2931', 'ibm.com', '2014-03-04', '', '', 1, 1, 1, 0, 1, 'John Doe', 'HR Manager', '928-3948', '0922-384-3455', 'johndoe@gmail.com', '2014-03-11', 'Jane Doe', 'HR Assistant', '234-2323', '0912-239-4443', 'janedoe@gmail.com', '2014-03-05');
+(1, 'IBM', 24, 1, '', 'Makati', '990-2930', '990-2931', 'ibm.com', '2014-03-04', '', '', 1, 1, 1, 0, 1, 'John Doe', 'HR Manager', '928-3948', '0922-384-3455', 'johndoe@gmail.com', '2014-03-11', 'Jane Doe', 'HR Assistant', '234-2323', '0912-239-4443', 'janedoe@gmail.com', '2014-03-05');
 
 -- --------------------------------------------------------
 
@@ -127,6 +134,69 @@ CREATE TABLE IF NOT EXISTS `employers_students_log` (
 
 INSERT INTO `employers_students_log` (`employerID`, `studentID`, `positionID`, `employmentType`, `startDate`, `endDate`) VALUES
 (1, 2, 0, 0, '0000-00-00', '2014-03-09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
+--
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`, `description`) VALUES
+(1, 'admin', 'Administrator'),
+(2, 'members', 'General User');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `industries`
+--
+
+CREATE TABLE IF NOT EXISTS `industries` (
+  `industryID` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`industryID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+
+--
+-- Dumping data for table `industries`
+--
+
+INSERT INTO `industries` (`industryID`, `type`) VALUES
+(1, 'Advertising / Design and Marketing'),
+(2, 'Aerospace & Defense'),
+(3, 'Automobiles & Parts'),
+(4, 'Business Process Outsourcing'),
+(5, 'Chemicals'),
+(6, 'Construction & Materials'),
+(7, 'Education / Training'),
+(8, 'Electronics & Electrical Equipment'),
+(9, 'Financials'),
+(10, 'Telecommunications'),
+(11, 'Travel & Leisure'),
+(12, 'Food & Beverage'),
+(13, 'General Industries'),
+(14, 'Health Care'),
+(15, 'Hotel / Resort / Restaurant'),
+(16, 'BPO'),
+(17, 'Industrial Engineering'),
+(18, 'Industrial Transportation'),
+(19, 'Media'),
+(20, 'Oil & Gas'),
+(21, 'Personal & Household Goods'),
+(22, 'Retail'),
+(23, 'Software & Computer Services'),
+(24, 'Technology Hardware & Equipment');
 
 -- --------------------------------------------------------
 
@@ -161,6 +231,20 @@ CREATE TABLE IF NOT EXISTS `job_openings_courses` (
   `jobOpeningID` int(11) NOT NULL,
   `courseID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login_attempts`
+--
+
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip_address` varbinary(16) NOT NULL,
+  `login` varchar(100) NOT NULL,
+  `time` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -218,118 +302,33 @@ INSERT INTO `students` (`studentID`, `firstName`, `lastName`, `middleName`, `lan
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `userID` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(25) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ip_address` varbinary(16) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `firstName` varchar(50) NOT NULL,
-  `middleName` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
-  `landline` varchar(11) NOT NULL,
-  `mobile` varchar(13) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `isActive` tinyint(1) NOT NULL,
-  PRIMARY KEY (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `salt` varchar(40) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `activation_code` varchar(40) DEFAULT NULL,
+  `forgotten_password_code` varchar(40) DEFAULT NULL,
+  `forgotten_password_time` int(11) unsigned DEFAULT NULL,
+  `remember_code` varchar(40) DEFAULT NULL,
+  `created_on` int(11) unsigned NOT NULL,
+  `last_login` int(11) unsigned DEFAULT NULL,
+  `active` tinyint(1) unsigned DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `middle_name` varchar(50) NOT NULL,
+  `landline` varchar(20) DEFAULT NULL,
+  `mobile` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `username`, `password`, `firstName`, `middleName`, `lastName`, `landline`, `mobile`, `email`, `isActive`) VALUES
-(1, '201101170', '11111111', 'Kashka', 'Paraiso', 'Enverga', '1111111', '09152447567', 'kenverga@gmail.com', 1),
-(2, '201101171', '31109090', 'Igii', 'Paraiso', 'Enverga', '1212121', '00000000', 'ienverga@gmail.com', 1),
-(3, '201301170', '01108081', 'Bart', 'Smith', 'Simpson', '1111111', '09237896644', 'bsimpson@gmail.com', 1);
-
---
--- Triggers `users`
---
-DROP TRIGGER IF EXISTS `update_user_tr`;
-DELIMITER //
-CREATE TRIGGER `update_user_tr` AFTER UPDATE ON `users`
- FOR EACH ROW BEGIN
-IF (NEW.password <> OLD.password)
-OR (NEW.password IS NOT NULL AND OLD.password IS NULL)
-OR (NEW.password IS NULL AND OLD.password IS NOT NULL)
-THEN
-INSERT INTO iOPS.audit_log
-VALUES (
-	'update'
-	, NULL
-	, NOW()
-    , IF(@user_id IS NULL, 0, @user_id)
-	, 'user'
-	, 'password'
-	, OLD.password
-	, NEW.password);
-END IF;
-
-IF (NEW.landline <> OLD.landline)
-OR (NEW.landline IS NOT NULL AND OLD.landline IS NULL)
-OR (NEW.landline IS NULL AND OLD.landline IS NOT NULL)
-THEN
-INSERT INTO iOPS.audit_log
-VALUES (
-    'update'
-    , NULL
-    , NOW()
-    , IF(@user_id IS NULL, 0, @user_id)
-    , 'user'
-    , 'landline'
-    , OLD.landline
-    , NEW.landline);
-	IF (NEW.userGroupID = 4 OR NEW.userGroupID = 5)
-	THEN
-        UPDATE iOPS.student
-		LEFT JOIN iOPS.user
-			ON student.userID = user.userID
-		SET  `contactDetailsLastUpdated` =  CURDATE()
-		WHERE  user.userID = @user_id;
-	END IF;
-END IF;
-
-IF (NEW.mobile <> OLD.mobile)
-OR (NEW.mobile IS NOT NULL AND OLD.mobile IS NULL)
-OR (NEW.mobile IS NULL AND OLD.mobile IS NOT NULL)
-THEN
-INSERT INTO iOPS.audit_log
-VALUES (
-    'update'
-    , NULL
-    , NOW()
-    , IF(@user_id IS NULL, 0, @user_id)
-    , 'user'
-    , 'mobile'
-    , OLD.mobile
-    , NEW.mobile);
-	IF (NEW.userGroupID = 4 OR NEW.userGroupID = 5)
-	THEN
-        UPDATE iOPS.student
-		LEFT JOIN iOPS.user
-			ON student.userID = user.userID
-		SET  `contactDetailsLastUpdated` =  CURDATE()
-		WHERE  user.userID = @user_id;
-	END IF;
-END IF;
-
-IF (NEW.email <> OLD.email)
-OR (NEW.email IS NOT NULL AND OLD.email IS NULL)
-OR (NEW.email IS NULL AND OLD.email IS NOT NULL)
-THEN
-INSERT INTO iOPS.audit_log
-VALUES (
-	'update'
-	, NULL
-	, NOW()
-    , IF(@user_id IS NULL, 0, @user_id)
-	, 'user'
-	, 'email'
-	, OLD.email
-	, NEW.email);
-END IF;
-
-END
-//
-DELIMITER ;
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `middle_name`, `landline`, `mobile`) VALUES
+(1, '\0\0', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', '', '0', '');
 
 -- --------------------------------------------------------
 
@@ -343,6 +342,48 @@ CREATE TABLE IF NOT EXISTS `users_employers_students_administrators` (
   `studentID` int(11) NOT NULL,
   `administratorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users_employers_students_administrators`
+--
+
+INSERT INTO `users_employers_students_administrators` (`userID`, `employerID`, `studentID`, `administratorID`) VALUES
+(1, 1, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_groups`
+--
+
+CREATE TABLE IF NOT EXISTS `users_groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
+  KEY `fk_users_groups_users1_idx` (`user_id`),
+  KEY `fk_users_groups_groups1_idx` (`group_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `users_groups`
+--
+
+INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
+(1, 1, 1),
+(2, 1, 2);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `users_groups`
+--
+ALTER TABLE `users_groups`
+  ADD CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
