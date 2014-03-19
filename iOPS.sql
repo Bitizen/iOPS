@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 18, 2014 at 06:49 AM
+-- Generation Time: Mar 19, 2014 at 09:48 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -76,7 +76,7 @@ INSERT INTO `audit_log` (`auditLogID`, `dt_timestamp`, `changedBy`, `module`, `f
 CREATE TABLE IF NOT EXISTS `employers` (
   `employerID` int(11) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(255) NOT NULL,
-  `industryID` int(11) NOT NULL,
+  `industryType` varchar(255) NOT NULL,
   `isHiring` tinyint(1) NOT NULL,
   `SECRegistrationFilePath` varchar(255) NOT NULL,
   `completeMailingAddress` varchar(255) NOT NULL,
@@ -91,18 +91,12 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `hasRecruitmentActivities` tinyint(1) NOT NULL,
   `hasAllowanceProvision` tinyint(1) NOT NULL,
   `hasFacultyImmersion` tinyint(1) NOT NULL,
-  `primaryContactName` varchar(150) NOT NULL,
-  `primaryContactDesignation` varchar(50) NOT NULL,
-  `primaryContactTelephoneNumber` varchar(16) NOT NULL,
-  `primaryContactMobileNumber` varchar(16) NOT NULL,
-  `primaryContactEmail` varchar(64) NOT NULL,
+  `primaryContactUserID` int(11) NOT NULL,
   `primaryContactDateOfBirth` date NOT NULL,
-  `secondaryContactName` varchar(150) NOT NULL,
-  `secondaryContactDesignation` varchar(50) NOT NULL,
-  `secondaryContactTelephoneNumber` varchar(16) NOT NULL,
-  `secondaryContactMobileNumber` varchar(16) NOT NULL,
-  `secondaryContactEmail` varchar(64) NOT NULL,
+  `secondaryContactUserID` int(11) NOT NULL,
   `secondaryContactDateOfBirth` date NOT NULL,
+  `tertiaryContactUserID` int(11) NOT NULL,
+  `tertiaryContactDateOfBirth` date NOT NULL,
   PRIMARY KEY (`employerID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -110,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `employers` (
 -- Dumping data for table `employers`
 --
 
-INSERT INTO `employers` (`employerID`, `companyName`, `industryID`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`) VALUES
-(1, 'IBM', 24, 1, '', 'Makati', '990-2930', '990-2931', 'ibm.com', '2014-03-04', '', '', 1, 1, 1, 0, 1, 'John Doe', 'HR Manager', '928-3948', '0922-384-3455', 'johndoe@gmail.com', '2014-03-11', 'Jane Doe', 'HR Assistant', '234-2323', '0912-239-4443', 'janedoe@gmail.com', '2014-03-05');
+INSERT INTO `employers` (`employerID`, `companyName`, `industryType`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactUserID`, `primaryContactDateOfBirth`, `secondaryContactUserID`, `secondaryContactDateOfBirth`, `tertiaryContactUserID`, `tertiaryContactDateOfBirth`) VALUES
+(1, 'IBM', 'Tec', 1, '0', 'Makati City', '938-3399', '938-3344', 'ibm.com.ph', '0000-00-00', '0', '0', 0, 0, 0, 0, 0, 2, '1991-01-01', 3, '1990-10-02', 4, '2014-03-17');
 
 -- --------------------------------------------------------
 
@@ -215,7 +209,6 @@ CREATE TABLE IF NOT EXISTS `job_openings` (
   `contactDetails` varchar(255) NOT NULL,
   `postDate` date NOT NULL,
   `postDuration` tinyint(2) NOT NULL,
-  `industry` varchar(255) NOT NULL,
   `isVerified` tinyint(1) NOT NULL,
   `isActive` tinyint(1) NOT NULL,
   PRIMARY KEY (`jobOpeningID`)
@@ -304,6 +297,7 @@ INSERT INTO `students` (`studentID`, `firstName`, `lastName`, `middleName`, `lan
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varbinary(16) NOT NULL,
+  `position` varchar(50) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(40) DEFAULT NULL,
@@ -318,18 +312,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `middle_name` varchar(50) NOT NULL,
-  `landline` varchar(20) DEFAULT NULL,
-  `mobile` varchar(20) NOT NULL,
+  `landline` varchar(60) DEFAULT NULL,
+  `mobile` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `middle_name`, `landline`, `mobile`) VALUES
-(1, '\0\0', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1395120589, 1, 'Admin', 'istrator', '', '0', ''),
-(2, '', 'employer', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'employer@gmail.com', NULL, NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 0, 1395121492, 1, 'john', 'doe', 'jay', '908-3379', '0911-234-3455');
+INSERT INTO `users` (`id`, `ip_address`, `position`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `middle_name`, `landline`, `mobile`) VALUES
+(1, '\0\0', '', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1395120589, 1, 'Admin', 'istrator', '', '0', ''),
+(2, '', 'Human Resources Representative', 'employer', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'employer@gmail.com', NULL, NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 0, 1395209958, 1, 'john', 'doe', 'jay', '908-3379', '0911-234-3455'),
+(3, '', 'IT', 'employer2', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'janedoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'jane', 'doe', 'jay', '339-2345', '0911-2123-45362'),
+(4, '', 'CEO', 'employer3', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'jaydoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'jay', 'doe', 'john', '493-3498', '0982-244-2311');
 
 -- --------------------------------------------------------
 
@@ -349,7 +345,9 @@ CREATE TABLE IF NOT EXISTS `users_employers_students_administrators` (
 --
 
 INSERT INTO `users_employers_students_administrators` (`userID`, `employerID`, `studentID`, `administratorID`) VALUES
-(2, 1, 0, 0);
+(2, 1, 0, 0),
+(3, 1, 0, 0),
+(4, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -365,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
   UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
   KEY `fk_users_groups_users1_idx` (`user_id`),
   KEY `fk_users_groups_groups1_idx` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users_groups`
@@ -373,7 +371,9 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
-(2, 2, 2);
+(2, 2, 2),
+(3, 3, 2),
+(4, 4, 2);
 
 --
 -- Constraints for dumped tables
@@ -383,8 +383,8 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 -- Constraints for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  ADD CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
