@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 19, 2014 at 09:48 AM
+-- Generation Time: Mar 19, 2014 at 10:53 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -91,21 +91,33 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `hasRecruitmentActivities` tinyint(1) NOT NULL,
   `hasAllowanceProvision` tinyint(1) NOT NULL,
   `hasFacultyImmersion` tinyint(1) NOT NULL,
-  `primaryContactUserID` int(11) NOT NULL,
+  `primaryContactName` varchar(150) NOT NULL,
+  `primaryContactDesignation` varchar(50) NOT NULL,
+  `primaryContactTelephoneNumber` varchar(60) NOT NULL,
+  `primaryContactMobileNumber` varchar(60) NOT NULL,
+  `primaryContactEmail` varchar(64) NOT NULL,
   `primaryContactDateOfBirth` date NOT NULL,
-  `secondaryContactUserID` int(11) NOT NULL,
+  `secondaryContactName` varchar(150) NOT NULL,
+  `secondaryContactDesignation` varchar(50) NOT NULL,
+  `secondaryContactTelephoneNumber` varchar(60) NOT NULL,
+  `secondaryContactMobileNumber` varchar(60) NOT NULL,
+  `secondaryContactEmail` varchar(64) NOT NULL,
   `secondaryContactDateOfBirth` date NOT NULL,
-  `tertiaryContactUserID` int(11) NOT NULL,
+  `tertiaryContactName` varchar(150) NOT NULL,
+  `tertiaryContactDesignation` varchar(50) NOT NULL,
+  `tertiaryContactTelephoneNumber` varchar(60) NOT NULL,
+  `tertiaryContactMobileNumber` varchar(60) NOT NULL,
+  `tertiaryContactEmail` varchar(64) NOT NULL,
   `tertiaryContactDateOfBirth` date NOT NULL,
   PRIMARY KEY (`employerID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `employers`
 --
 
-INSERT INTO `employers` (`employerID`, `companyName`, `industryType`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactUserID`, `primaryContactDateOfBirth`, `secondaryContactUserID`, `secondaryContactDateOfBirth`, `tertiaryContactUserID`, `tertiaryContactDateOfBirth`) VALUES
-(1, 'IBM', 'Tec', 1, '0', 'Makati City', '938-3399', '938-3344', 'ibm.com.ph', '0000-00-00', '0', '0', 0, 0, 0, 0, 0, 2, '1991-01-01', 3, '1990-10-02', 4, '2014-03-17');
+INSERT INTO `employers` (`employerID`, `companyName`, `industryType`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`, `tertiaryContactName`, `tertiaryContactDesignation`, `tertiaryContactTelephoneNumber`, `tertiaryContactMobileNumber`, `tertiaryContactEmail`, `tertiaryContactDateOfBirth`) VALUES
+(1, 'IBM', 'Tec', 1, '', 'Makati City', '949-3939', '949-9394', 'ibm.com.ph', '2014-03-24', '', '', 1, 0, 1, 0, 1, '', '', '', '', '', '0000-00-00', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '0000-00-00');
 
 -- --------------------------------------------------------
 
