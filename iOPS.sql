@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 19, 2014 at 10:53 AM
+-- Generation Time: Mar 20, 2014 at 01:03 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -91,24 +91,9 @@ CREATE TABLE IF NOT EXISTS `employers` (
   `hasRecruitmentActivities` tinyint(1) NOT NULL,
   `hasAllowanceProvision` tinyint(1) NOT NULL,
   `hasFacultyImmersion` tinyint(1) NOT NULL,
-  `primaryContactName` varchar(150) NOT NULL,
-  `primaryContactDesignation` varchar(50) NOT NULL,
-  `primaryContactTelephoneNumber` varchar(60) NOT NULL,
-  `primaryContactMobileNumber` varchar(60) NOT NULL,
-  `primaryContactEmail` varchar(64) NOT NULL,
-  `primaryContactDateOfBirth` date NOT NULL,
-  `secondaryContactName` varchar(150) NOT NULL,
-  `secondaryContactDesignation` varchar(50) NOT NULL,
-  `secondaryContactTelephoneNumber` varchar(60) NOT NULL,
-  `secondaryContactMobileNumber` varchar(60) NOT NULL,
-  `secondaryContactEmail` varchar(64) NOT NULL,
-  `secondaryContactDateOfBirth` date NOT NULL,
-  `tertiaryContactName` varchar(150) NOT NULL,
-  `tertiaryContactDesignation` varchar(50) NOT NULL,
-  `tertiaryContactTelephoneNumber` varchar(60) NOT NULL,
-  `tertiaryContactMobileNumber` varchar(60) NOT NULL,
-  `tertiaryContactEmail` varchar(64) NOT NULL,
-  `tertiaryContactDateOfBirth` date NOT NULL,
+  `primaryContactUserID` int(11) NOT NULL,
+  `secondaryContactUserID` int(11) NOT NULL,
+  `tertiaryContactUserID` int(11) NOT NULL,
   PRIMARY KEY (`employerID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -116,8 +101,9 @@ CREATE TABLE IF NOT EXISTS `employers` (
 -- Dumping data for table `employers`
 --
 
-INSERT INTO `employers` (`employerID`, `companyName`, `industryType`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactName`, `primaryContactDesignation`, `primaryContactTelephoneNumber`, `primaryContactMobileNumber`, `primaryContactEmail`, `primaryContactDateOfBirth`, `secondaryContactName`, `secondaryContactDesignation`, `secondaryContactTelephoneNumber`, `secondaryContactMobileNumber`, `secondaryContactEmail`, `secondaryContactDateOfBirth`, `tertiaryContactName`, `tertiaryContactDesignation`, `tertiaryContactTelephoneNumber`, `tertiaryContactMobileNumber`, `tertiaryContactEmail`, `tertiaryContactDateOfBirth`) VALUES
-(1, 'IBM', 'Tec', 1, '', 'Makati City', '949-3939', '949-9394', 'ibm.com.ph', '2014-03-24', '', '', 1, 0, 1, 0, 1, '', '', '', '', '', '0000-00-00', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '0000-00-00');
+INSERT INTO `employers` (`employerID`, `companyName`, `industryType`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactUserID`, `secondaryContactUserID`, `tertiaryContactUserID`) VALUES
+(1, 'IBM', 'Retail', 1, '', 'Makati City', '959-3942', '348-4531', 'ibm.com', '1999-11-30', 'uploads\\Company_Logos\\IBM_logo.png', '', 0, 1, 1, 1, 0, 0, 0, 0),
+(2, 'infor', '', 0, '', '', '', '', '', '0000-00-00', '', '', 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -326,6 +312,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `middle_name` varchar(50) NOT NULL,
   `landline` varchar(60) DEFAULT NULL,
   `mobile` varchar(60) NOT NULL,
+  `date_of_birth` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
@@ -333,11 +320,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `position`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `middle_name`, `landline`, `mobile`) VALUES
-(1, '\0\0', '', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1395120589, 1, 'Admin', 'istrator', '', '0', ''),
-(2, '', 'Human Resources Representative', 'employer', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'employer@gmail.com', NULL, NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 0, 1395209958, 1, 'john', 'doe', 'jay', '908-3379', '0911-234-3455'),
-(3, '', 'IT', 'employer2', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'janedoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'jane', 'doe', 'jay', '339-2345', '0911-2123-45362'),
-(4, '', 'CEO', 'employer3', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'jaydoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'jay', 'doe', 'john', '493-3498', '0982-244-2311');
+INSERT INTO `users` (`id`, `ip_address`, `position`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `middle_name`, `landline`, `mobile`, `date_of_birth`) VALUES
+(1, '\0\0', '', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1395120589, 1, 'Admin', 'istrator', '', '0', '', '0000-00-00'),
+(2, '', 'Rockstar', 'employer', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'irock@gmail.com', NULL, NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 0, 1395317026, 1, 'Bob', 'Bobbertson', 'Bobbert', '573-3344', '0917-232-2471', '0000-00-00'),
+(3, '', 'IT', 'employer2', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'janedoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'Jane', 'Doe', 'Jay', '339-2345', '0911-2123-45362', '0000-00-00'),
+(4, '', 'CEO', 'employer3', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'jaydoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'Jay', 'Joe', 'John', '493-3498', '0982-244-2311', '0000-00-00');
 
 -- --------------------------------------------------------
 
