@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2014 at 01:03 PM
+-- Generation Time: Mar 23, 2014 at 10:26 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `administrators`
 --
 
+DROP TABLE IF EXISTS `administrators`;
 CREATE TABLE IF NOT EXISTS `administrators` (
   `administratorID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(50) NOT NULL,
@@ -48,6 +49,7 @@ INSERT INTO `administrators` (`administratorID`, `firstName`, `lastName`, `middl
 -- Table structure for table `audit_log`
 --
 
+DROP TABLE IF EXISTS `audit_log`;
 CREATE TABLE IF NOT EXISTS `audit_log` (
   `auditLogID` int(6) NOT NULL AUTO_INCREMENT,
   `dt_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -73,6 +75,7 @@ INSERT INTO `audit_log` (`auditLogID`, `dt_timestamp`, `changedBy`, `module`, `f
 -- Table structure for table `employers`
 --
 
+DROP TABLE IF EXISTS `employers`;
 CREATE TABLE IF NOT EXISTS `employers` (
   `employerID` int(11) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(255) NOT NULL,
@@ -102,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `employers` (
 --
 
 INSERT INTO `employers` (`employerID`, `companyName`, `industryType`, `isHiring`, `SECRegistrationFilePath`, `completeMailingAddress`, `telephoneNumber`, `faxNumber`, `website`, `dateEstablished`, `companyLogoFilePath`, `otherDocumentsFilePath`, `hasScholarshipGrants`, `hasSeminarsAndTrainings`, `hasRecruitmentActivities`, `hasAllowanceProvision`, `hasFacultyImmersion`, `primaryContactUserID`, `secondaryContactUserID`, `tertiaryContactUserID`) VALUES
-(1, 'IBM', 'Retail', 1, '', 'Makati City', '959-3942', '348-4531', 'ibm.com', '1999-11-30', 'uploads\\Company_Logos\\IBM_logo.png', '', 0, 1, 1, 1, 0, 0, 0, 0),
+(1, 'IBM', 'Financials', 1, '', 'Makati City', '934-6644', '948-9944', 'ibm.com', '1990-11-30', '', '', 0, 1, 0, 0, 1, 0, 0, 0),
 (2, 'infor', '', 0, '', '', '', '', '', '0000-00-00', '', '', 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -111,6 +114,7 @@ INSERT INTO `employers` (`employerID`, `companyName`, `industryType`, `isHiring`
 -- Table structure for table `employers_students_log`
 --
 
+DROP TABLE IF EXISTS `employers_students_log`;
 CREATE TABLE IF NOT EXISTS `employers_students_log` (
   `employerID` int(11) NOT NULL,
   `studentID` int(11) NOT NULL,
@@ -125,7 +129,8 @@ CREATE TABLE IF NOT EXISTS `employers_students_log` (
 --
 
 INSERT INTO `employers_students_log` (`employerID`, `studentID`, `positionID`, `employmentType`, `startDate`, `endDate`) VALUES
-(1, 2, 0, 0, '0000-00-00', '2014-03-09');
+(1, 2, 0, 0, '0000-00-00', '2014-03-09'),
+(2, 1, 2, 0, '2014-03-02', '2014-03-09');
 
 -- --------------------------------------------------------
 
@@ -133,12 +138,13 @@ INSERT INTO `employers_students_log` (`employerID`, `studentID`, `positionID`, `
 -- Table structure for table `groups`
 --
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `groups`
@@ -146,49 +152,8 @@ CREATE TABLE IF NOT EXISTS `groups` (
 
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
-(2, 'employer', 'Employer');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `industries`
---
-
-CREATE TABLE IF NOT EXISTS `industries` (
-  `industryID` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) NOT NULL,
-  PRIMARY KEY (`industryID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
-
---
--- Dumping data for table `industries`
---
-
-INSERT INTO `industries` (`industryID`, `type`) VALUES
-(1, 'Advertising / Design and Marketing'),
-(2, 'Aerospace & Defense'),
-(3, 'Automobiles & Parts'),
-(4, 'Business Process Outsourcing'),
-(5, 'Chemicals'),
-(6, 'Construction & Materials'),
-(7, 'Education / Training'),
-(8, 'Electronics & Electrical Equipment'),
-(9, 'Financials'),
-(10, 'Telecommunications'),
-(11, 'Travel & Leisure'),
-(12, 'Food & Beverage'),
-(13, 'General Industries'),
-(14, 'Health Care'),
-(15, 'Hotel / Resort / Restaurant'),
-(16, 'BPO'),
-(17, 'Industrial Engineering'),
-(18, 'Industrial Transportation'),
-(19, 'Media'),
-(20, 'Oil & Gas'),
-(21, 'Personal & Household Goods'),
-(22, 'Retail'),
-(23, 'Software & Computer Services'),
-(24, 'Technology Hardware & Equipment');
+(2, 'employer', 'Employer'),
+(3, 'superadmin', 'Super Administrator');
 
 -- --------------------------------------------------------
 
@@ -196,6 +161,7 @@ INSERT INTO `industries` (`industryID`, `type`) VALUES
 -- Table structure for table `job_openings`
 --
 
+DROP TABLE IF EXISTS `job_openings`;
 CREATE TABLE IF NOT EXISTS `job_openings` (
   `jobOpeningID` int(11) NOT NULL AUTO_INCREMENT,
   `employerID` int(11) NOT NULL,
@@ -218,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `job_openings` (
 -- Table structure for table `job_openings_courses`
 --
 
+DROP TABLE IF EXISTS `job_openings_courses`;
 CREATE TABLE IF NOT EXISTS `job_openings_courses` (
   `jobOpeningID` int(11) NOT NULL,
   `courseID` int(11) NOT NULL
@@ -229,6 +196,7 @@ CREATE TABLE IF NOT EXISTS `job_openings_courses` (
 -- Table structure for table `login_attempts`
 --
 
+DROP TABLE IF EXISTS `login_attempts`;
 CREATE TABLE IF NOT EXISTS `login_attempts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varbinary(16) NOT NULL,
@@ -243,6 +211,7 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 -- Table structure for table `skills`
 --
 
+DROP TABLE IF EXISTS `skills`;
 CREATE TABLE IF NOT EXISTS `skills` (
   `skillID` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
@@ -255,6 +224,7 @@ CREATE TABLE IF NOT EXISTS `skills` (
 -- Table structure for table `students`
 --
 
+DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
   `studentID` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(50) NOT NULL,
@@ -265,8 +235,6 @@ CREATE TABLE IF NOT EXISTS `students` (
   `emailAddress` varchar(64) NOT NULL,
   `address` varchar(255) NOT NULL,
   `resumePath` varchar(255) NOT NULL,
-  `skillID` int(11) NOT NULL,
-  `isGraduate` tinyint(1) NOT NULL,
   `currentEmployerID` int(11) NOT NULL,
   `contactDetailsLastUpdated` date NOT NULL,
   `yearGraduated` int(4) NOT NULL,
@@ -282,9 +250,21 @@ CREATE TABLE IF NOT EXISTS `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`studentID`, `firstName`, `lastName`, `middleName`, `landline`, `mobile`, `emailAddress`, `address`, `resumePath`, `skillID`, `isGraduate`, `currentEmployerID`, `contactDetailsLastUpdated`, `yearGraduated`, `monthGraduated`, `termGraduated`, `courseID`, `statusID`, `isVerified`) VALUES
-(1, '', '', '', '', '', '', '', '', 0, 0, 0, '2014-03-10', 2014, 0, 0, 5, 1, 1),
-(2, '', '', '', '', '', '', '', '', 0, 0, 0, '2014-03-01', 2013, 0, 0, 3, 2, 0);
+INSERT INTO `students` (`studentID`, `firstName`, `lastName`, `middleName`, `landline`, `mobile`, `emailAddress`, `address`, `resumePath`, `currentEmployerID`, `contactDetailsLastUpdated`, `yearGraduated`, `monthGraduated`, `termGraduated`, `courseID`, `statusID`, `isVerified`) VALUES
+(1, 'henry', 'henricus xi', 'lao', '982-1000', '0918-348-8828', 'henricuxi@gmail.com', 'Taguig', '', 0, '2014-03-10', 2014, 0, 0, 4, 2, 1),
+(2, 'tabby', 'napoles', 'lim', '848-2394', '0914-533-5321', 'tlnap@gmail.com', 'Pasay', '', 1, '2014-03-01', 2013, 0, 0, 3, 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students_skills`
+--
+
+DROP TABLE IF EXISTS `students_skills`;
+CREATE TABLE IF NOT EXISTS `students_skills` (
+  `studentID` int(11) NOT NULL,
+  `skillID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -292,6 +272,7 @@ INSERT INTO `students` (`studentID`, `firstName`, `lastName`, `middleName`, `lan
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varbinary(16) NOT NULL,
@@ -321,8 +302,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `position`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `middle_name`, `landline`, `mobile`, `date_of_birth`) VALUES
-(1, '\0\0', '', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1395120589, 1, 'Admin', 'istrator', '', '0', '', '0000-00-00'),
-(2, '', 'Rockstar', 'employer', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'irock@gmail.com', NULL, NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 0, 1395317026, 1, 'Bob', 'Bobbertson', 'Bobbert', '573-3344', '0917-232-2471', '0000-00-00'),
+(1, '\0\0', 'Hero', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 1268889823, 1395566496, 1, 'Gregg', 'Pilar', 'H.', '838-3333', '0918-348-8828', '1930-11-30'),
+(2, '', 'HR Manager', 'employer', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'bobbertson@gmail.com', NULL, NULL, NULL, '10bd3f40a4ebb18c8e7165019d352680f5f34bc7', 0, 1395536353, 1, 'Bobby', 'Bobbertson', 'Mark', '573-3344', '0917-232-2471', '1986-11-20'),
 (3, '', 'IT', 'employer2', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'janedoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'Jane', 'Doe', 'Jay', '339-2345', '0911-2123-45362', '0000-00-00'),
 (4, '', 'CEO', 'employer3', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', NULL, 'jaydoe@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, NULL, 'Jay', 'Joe', 'John', '493-3498', '0982-244-2311', '0000-00-00');
 
@@ -332,6 +313,7 @@ INSERT INTO `users` (`id`, `ip_address`, `position`, `username`, `password`, `sa
 -- Table structure for table `users_employers_students_administrators`
 --
 
+DROP TABLE IF EXISTS `users_employers_students_administrators`;
 CREATE TABLE IF NOT EXISTS `users_employers_students_administrators` (
   `userID` int(11) NOT NULL,
   `employerID` int(11) NOT NULL,
@@ -346,7 +328,8 @@ CREATE TABLE IF NOT EXISTS `users_employers_students_administrators` (
 INSERT INTO `users_employers_students_administrators` (`userID`, `employerID`, `studentID`, `administratorID`) VALUES
 (2, 1, 0, 0),
 (3, 1, 0, 0),
-(4, 1, 0, 0);
+(4, 1, 0, 0),
+(1, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -354,6 +337,7 @@ INSERT INTO `users_employers_students_administrators` (`userID`, `employerID`, `
 -- Table structure for table `users_groups`
 --
 
+DROP TABLE IF EXISTS `users_groups`;
 CREATE TABLE IF NOT EXISTS `users_groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
