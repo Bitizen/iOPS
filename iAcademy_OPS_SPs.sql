@@ -1,3 +1,75 @@
+
+
+#####################################################################
+#### 	NOTE:
+####
+#### 	   If there's an existing proc within the updates,
+####	   just drop those then import the new ones.
+####	   Sorry sa inconvenience :C
+####	   Thanks!
+
+########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateMyRepresentative`(IN `pUserName` VARCHAR(25), IN `pFirstName` VARCHAR(50), IN `pMiddleName` VARCHAR(50), IN `pLastName` VARCHAR(50), IN `pPosition` VARCHAR(50), IN `pTelephone` VARCHAR(60), IN `pMobile` VARCHAR(60), IN `pEmail` VARCHAR(64), IN `pDateOfBirth` DATE)
+UPDATE `iOPS`.`users` 
+SET `position` = pPosition
+, `email` = pEmail
+, `first_name` = pFirstName
+, `last_name` = pLastName
+, `middle_name` = pMiddleName
+, `landline` = pTelephone
+, `mobile` = pMobile
+, `date_of_birth` = pDateOfBirth
+WHERE `users`.`username` like pUserName
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateRepresentative`(IN `pUserID` INT(11), IN `pFirstName` VARCHAR(50), IN `pMiddleName` VARCHAR(50), IN `pLastName` VARCHAR(50), IN `pPosition` VARCHAR(50), IN `pTelephone` VARCHAR(60), IN `pMobile` VARCHAR(60), IN `pEmail` VARCHAR(64), IN `pDateOfBirth` DATE)
+UPDATE `iOPS`.`users` 
+SET `position` = pPosition
+, `email` = pEmail
+, `first_name` = pFirstName
+, `last_name` = pLastName
+, `middle_name` = pMiddleName
+, `landline` = pTelephone
+, `mobile` = pMobile
+, `date_of_birth` = pDateOfBirth
+WHERE `users`.`id` = pUserID
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewAlumnus`(IN `pAlumnusID` INT(11))
+    NO SQL
+SELECT s.firstName
+, s.lastName
+, s.middleName
+, s.landline
+, s.mobile
+, s.contactDetailsLastUpdated
+, s.emailAddress
+, s.address
+, s.resumePath
+, e.companyName
+, s.courseID
+, s.statusID
+, s.isVerified
+
+FROM iOPS.students s
+LEFT JOIN iOPS.employers e
+	ON s.currentEmployerID = e.employerID
+WHERE s.studentID = pAlumnusID
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
+
+
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addStudent`(
 		  IN studentID int(11)			
 	 	, IN firstName varchar(50)
@@ -290,9 +362,6 @@ SET `position` = pPosition
 , `mobile` = pMobile
 , `date_of_birth` = pDateOfBirth
 WHERE `users`.`username` like pUserName
-
-
-
 
 
 
