@@ -41,7 +41,8 @@ WHERE `users`.`id` = pUserID
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewAlumnus`(IN `pAlumnusID` INT(11))
     NO SQL
-SELECT s.firstName
+SELECT s.studentID
+, s.firstName
 , s.lastName
 , s.middleName
 , s.landline
@@ -54,11 +55,66 @@ SELECT s.firstName
 , s.courseID
 , s.statusID
 , s.isVerified
+, s.currentEmployerID
 
 FROM iOPS.students s
 LEFT JOIN iOPS.employers e
 	ON s.currentEmployerID = e.employerID
 WHERE s.studentID = pAlumnusID
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewIntern`(IN `pInternID` INT(11))
+    NO SQL
+SELECT s.studentID
+, s.firstName
+, s.lastName
+, s.middleName
+, s.landline
+, s.mobile
+, s.contactDetailsLastUpdated
+, s.emailAddress
+, s.address
+, s.resumePath
+, e.companyName
+, s.courseID
+, s.statusID
+, s.isVerified
+, s.currentEmployerID
+
+FROM iOPS.students s
+LEFT JOIN iOPS.employers e
+	ON s.currentEmployerID = e.employerID
+WHERE s.studentID = pInternID
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateAlumnus`(IN `pAlumnusID` INT(11), IN `pFirstName` VARCHAR(50), IN `pMiddleName` VARCHAR(50), IN `pLastName` VARCHAR(50), IN `pLandline` VARCHAR(60), IN `pMobile` VARCHAR(60), IN `pEmail` VARCHAR(64), IN `pAddress` VARCHAR(255), IN `pCompanyID` INT(11), IN `pCourseID` INT(11), IN `pStatusID` INT(11), IN `pIsVerified` TINYINT(1))
+UPDATE `iOPS`.`students` 
+SET `firstName` = pFirstName
+, `middleName` = pMiddleName
+, `lastName` = pLastName
+, `landline` = pLandline
+, `mobile` = pMobile
+, `emailAddress` = pEmail
+, `address` = pAddress
+, `currentEmployerID` = pCompanyID
+, `courseID` = pCourseID
+, `statusID` = pStatusID
+, `isVerified` = pIsVerified
+WHERE `students`.`studentID` = pAlumnusID
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateIntern`(IN `pInternID` INT(11), IN `pFirstName` VARCHAR(50), IN `pMiddleName` VARCHAR(50), IN `pLastName` VARCHAR(50), IN `pLandline` VARCHAR(60), IN `pMobile` VARCHAR(60), IN `pEmail` VARCHAR(64), IN `pAddress` VARCHAR(255), IN `pCompanyID` INT(11), IN `pCourseID` INT(11), IN `pStatusID` INT(11), IN `pIsVerified` TINYINT(1))
+UPDATE `iOPS`.`students` 
+SET `firstName` = pFirstName
+, `middleName` = pMiddleName
+, `lastName` = pLastName
+, `landline` = pLandline
+, `mobile` = pMobile
+, `emailAddress` = pEmail
+, `address` = pAddress
+, `currentEmployerID` = pCompanyID
+, `courseID` = pCourseID
+, `statusID` = pStatusID
+, `isVerified` = pIsVerified
+WHERE `students`.`studentID` = pInternID
+
 ########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### END COMMIT MERGED EMPLOYER SPRINT 2 ####################
