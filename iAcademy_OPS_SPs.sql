@@ -15,6 +15,23 @@
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewNewGrads`(IN `pThisYear` INT(4))
+    NO SQL
+SELECT s.studentID
+, s.firstName
+, s.lastName
+, s.middleName
+, s.courseID
+, s.statusID
+, s.isVerified
+, e.companyName
+
+FROM iOPS.students s
+LEFT JOIN iOPS.employers e
+	ON s.currentEmployerID = e.employerID
+WHERE s.isGraduate = 0
+AND s.yearGraduated = pThisYear
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateContactDetails`(IN `pUserName` VARCHAR(25), IN `pTelephone` VARCHAR(60), IN `pMobile` VARCHAR(60), IN `pEmail` VARCHAR(64))
 UPDATE `iOPS`.`users` 
 SET `email` = pEmail
