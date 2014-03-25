@@ -15,6 +15,13 @@
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateContactDetails`(IN `pUserName` VARCHAR(25), IN `pTelephone` VARCHAR(60), IN `pMobile` VARCHAR(60), IN `pEmail` VARCHAR(64))
+UPDATE `iOPS`.`users` 
+SET `email` = pEmail
+, `landline` = pTelephone
+, `mobile` = pMobile
+WHERE `users`.`username` like pUserName
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateMyRepresentative`(IN `pUserName` VARCHAR(25), IN `pFirstName` VARCHAR(50), IN `pMiddleName` VARCHAR(50), IN `pLastName` VARCHAR(50), IN `pPosition` VARCHAR(50), IN `pTelephone` VARCHAR(60), IN `pMobile` VARCHAR(60), IN `pEmail` VARCHAR(64), IN `pDateOfBirth` DATE)
 UPDATE `iOPS`.`users` 
 SET `position` = pPosition
