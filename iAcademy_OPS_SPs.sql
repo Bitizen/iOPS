@@ -15,9 +15,12 @@
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
 ########### NEW COMMIT MERGED EMPLOYER SPRINT 2 ####################
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateInternToAlumnus`(IN `pInternID` INT(11))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateInternToAlumnus`(IN `pInternID` INT(11), IN `pYear` INT(4), IN `pMonth` INT(2), IN `pTerm` INT(1))
 UPDATE `iOPS`.`students` 
 SET `isGraduate` = 1
+, `yearGraduated` = pYear
+, `monthGraduated` = pMonth
+, `termGraduated` = pTerm
 WHERE `students`.`studentID` = pInternID
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewNewGrads`(IN `pThisYear` INT(4))
