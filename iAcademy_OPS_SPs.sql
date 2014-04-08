@@ -27,6 +27,97 @@ DELIMITER $$
 -- Procedures
 --
 
+--
+-- BEGIN NEW
+--
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewMyAffiliatedEmployees`(IN `pUserName` VARCHAR(25))
+    NO SQL
+BEGIN
+declare _eID int(11);
+
+SELECT e.employerID into _eID
+FROM iOPS.employers e
+LEFT JOIN iOPS.users_employers_students_administrators uesa
+	ON e.employerID = uesa.employerID
+LEFT JOIN iOPS.users u
+	ON uesa.userID = u.id
+WHERE u.username like pUserName;
+
+SELECT
+  iops.students.studentID
+		, iops.students.firstName
+		, iops.students.middleName
+		, iops.students.lastName
+		, iops.students.landline
+		, iops.students.mobile
+		, iops.students.emailAddress
+		, iops.students.address
+                , iops.students.courseID
+                , iops.students.statusID
+                , iops.employers.companyName
+		, iops.employers_students_log.startDate
+		, iops.employers_students_log.endDate
+		, iops.positions.position
+	FROM iops.students 
+	INNER JOIN iops.employers_students_log
+	ON iops.students.studentID = iops.employers_students_log.studentID
+       LEFT JOIN iops.employers
+        ON iops.students.currentEmployerID = iops.employers.employerID
+	LEFT JOIN iops.positions
+		ON iops.positions.positionID = iops.employers_students_log.positionID
+	WHERE iops.employers_students_log.employerID = _eID 
+	AND iops.students.isVerified = 1
+	AND iops.students.isGraduate = 1;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `viewMyAffiliatedInterns`(IN `pUserName` VARCHAR(25))
+    NO SQL
+BEGIN
+declare _eID int(11);
+
+SELECT e.employerID into _eID
+FROM iOPS.employers e
+LEFT JOIN iOPS.users_employers_students_administrators uesa
+	ON e.employerID = uesa.employerID
+LEFT JOIN iOPS.users u
+	ON uesa.userID = u.id
+WHERE u.username like pUserName;
+
+SELECT
+  iops.students.studentID
+		, iops.students.firstName
+		, iops.students.middleName
+		, iops.students.lastName
+		, iops.students.landline
+		, iops.students.mobile
+		, iops.students.emailAddress
+		, iops.students.address
+                , iops.students.courseID
+                , iops.students.statusID
+                , iops.employers.companyName
+		, iops.employers_students_log.startDate
+		, iops.employers_students_log.endDate
+		, iops.positions.position
+	FROM iops.students 
+	INNER JOIN iops.employers_students_log
+	ON iops.students.studentID = iops.employers_students_log.studentID
+       LEFT JOIN iops.employers
+        ON iops.students.currentEmployerID = iops.employers.employerID
+	LEFT JOIN iops.positions
+		ON iops.positions.positionID = iops.employers_students_log.positionID
+	WHERE iops.employers_students_log.employerID = _eID 
+	AND iops.students.isVerified = 1
+	AND iops.students.isGraduate = 0;
+
+END$$ 
+
+
+--
+-- END NEW
+--
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `viewMyStudentContacts`(IN `pCompanyName` VARCHAR(255))
     NO SQL
 BEGIN
